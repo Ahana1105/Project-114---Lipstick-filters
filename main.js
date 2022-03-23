@@ -1,5 +1,8 @@
-function preload() {
+lefteye_x =0;
+lefteye_y = 0;
 
+function preload() {
+filter = loadImage('https://i.postimg.cc/nzL1HVSw/beach-sg-removebg-preview.png');
 }
 
 function setup() {
@@ -17,19 +20,23 @@ function modelLoaded() {
 }
 
 function gotPoses(results) {
-    if (result.length > 0) {
+    if (results.length > 0) {
+
+        lefteye_x = results[0].pose.leftEye.x;
+        lefteye_y = results[0].pose.leftEye.y;
 
     console.log(results);
-    console.log(results[0].pose.nose.x);
-    console.log(results[0].pose.nose.y);
+    console.log(results[0].pose.leftEye.x);
+    console.log(results[0].pose.leftEye.y);
     }
 }
 
 function draw() {
-image(video, 0, 0, 300, 300)
+image(video, 0, 0, 300, 300);
+image(filter, lefteye_x - 65, lefteye_y - 40, 90, 80)
 }
 
 function take_snapshot() {
-save('MyClownNose.jpeg');
+save('MyTrendyGlares.jpeg');
 
 }
